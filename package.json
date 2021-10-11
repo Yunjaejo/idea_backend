@@ -1,0 +1,31 @@
+{
+  "name": "idea_backend",
+  "version": "1.0.0",
+  "description": "커밋테스트 도도 하나 둘",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yunjaejo/idea_backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yunjaejo/idea_backend/issues"
+  },
+  "homepage": "https://github.com/Yunjaejo/idea_backend#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.10",
+    "nodemon": "^2.0.13"
+  },
+  "devDependencies": {
+    "jest": "^27.2.5"
+  }
+}
