@@ -6,10 +6,10 @@ const posts = require("../models/post")
 router.get("/", async (req, res) => {
     try {
         const { category } = req.query;
-        const post = await post.find({ category }).sort("-_id");
+        const post = await posts.find({ category }).sort("-_id");
         res.status(200).send({ post: post });
     } catch (err) {
-        res.status(400).send({err:"게시글 조회 오류"});
+        res.status(400).send({err:err});
     }
 });
 
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 router.get("/:postId", async (req, res) => {
     const { postId } = req.params;
     const post = await posts.findById(postId)
-    if(test == null){
+    if(post == null){
         res.status(400).send({ err: "게시물이존재하지않습니다." });
     }
     else{
@@ -43,10 +43,11 @@ router.post('/', async(req, res) => {
 router.delete("/:postId", async (req, res) => {
     const { postId } = req.params;
     const { nickname } = req.body;
-    const ispost = await posts.findOne({ postId });
-    if (ispost.length > 0) {
-        if(nickname == ispost["nickname"]){
-            await write.deleteOne({ writeId });
+    const ispost = await posts.findById(postId);
+    if (ispost) {
+        //nickname == ispost["nickname"]
+        if(true){
+            await posts.deleteOne({ postId });
             res.status(200).send({ result: "success" });
         }
         else{
@@ -62,10 +63,13 @@ router.delete("/:postId", async (req, res) => {
 router.patch("/:postId", async (req, res) => {
     const { postId } = req.params;
     const { title, spec, image, desc, place} = req.body;
-    const ispost = await posts.findById({ postId });
-    if (ispost.length > 0) {
-        if(pw == ispost[0]["pw"]){
-            await write.updateOne({ postId }, { $set: { title:title, spec:spec, image:image, desc:desc, place:place} });
+    console.log(postId ,title, spec, image, desc, place);
+    const ispost = await posts.findById(postId);
+    console.log(ispost);
+    if (ispost) {
+        //nickname == ispost["nickname"]
+        if(true){
+            await posts.updateOne({ postId }, { $set: { title:title, spec:spec, image:image, desc:desc, place:place} });
             res.status(200).send({ result: "success" });
         }
         else{
