@@ -1,10 +1,9 @@
 const express = require("express");
-require('date-utils');
 const router = express.Router();
 const posts = require("../models/post")
 
 //게시글 조회
-router.get("/post", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const { category } = req.query;
         const post = await post.find({ category }).sort("-_id");
@@ -15,7 +14,7 @@ router.get("/post", async (req, res) => {
 });
 
 //게시글 상세조회
-router.get("/post/:postId", async (req, res) => {
+router.get("/:postId", async (req, res) => {
     const { postId } = req.params;
     const post = await posts.findById(postId)
     if(test == null){
@@ -27,7 +26,7 @@ router.get("/post/:postId", async (req, res) => {
 });
 
 //게시물 작성
-router.post('/post', async(req, res) => {
+router.post('/', async(req, res) => {
     const { title, spec, nickname, image, desc ,place} = req.body;
     try{
         await posts.create({title:title, spec:spec, nickname:nickname, image:image, desc:desc ,place:place });
@@ -41,7 +40,7 @@ router.post('/post', async(req, res) => {
 
 
 //게시물 삭제
-router.delete("/post/:postId", async (req, res) => {
+router.delete("/:postId", async (req, res) => {
     const { postId } = req.params;
     const { nickname } = req.body;
     const ispost = await posts.findOne({ postId });
@@ -60,7 +59,7 @@ router.delete("/post/:postId", async (req, res) => {
 })
 
 //게시물 수정
-router.patch("/post/:postId", async (req, res) => {
+router.patch("/:postId", async (req, res) => {
     const { postId } = req.params;
     const { title, spec, image, desc, place} = req.body;
     const ispost = await posts.findById({ postId });
