@@ -1,17 +1,18 @@
 const express = require('express');
-const User = require('../schemas/user');
+const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const router = express.Router(); 
 const uf = require('./userFunction.js');
 
 // 회원가입
-router.post('/signUp', async (req, res) => {
+router.post('/signup', async (req, res) => {
   const { email, pw, pwCheck, nickname } = req.body;
-  const existId = await User.findOne({ userId: email });
-
+  const existId = await User.findOne({ email: email });
+  const existName = await User.findOne({ nickname: nickname });
   if (existId) {
-  } else if (!uf.nickeck(nickname)) {
-    res.status(400).send({});
+    res.status(401).send({});
+  } else if (existName) {
+    res.status(401).send({});
   } else if (!uf.idCheck(email)) {
     res.status(401).send({});
   } else if (!uf.pwConfirm(pw, pwCheck)) {
@@ -22,8 +23,9 @@ router.post('/signUp', async (req, res) => {
     res.status(401).send({});
   } else {
     await User.create({
-      userId: email,
+      email: email,
       pw: pw,
+      nickname: nickname
     });
     res.send({ result: 'success' });
   }
@@ -32,10 +34,11 @@ router.post('/signUp', async (req, res) => {
 // 로그인
 router.post('/login', async (req, res) => {
   const { email, pw } = req.body;
-  const users = await User.findOne({ userId: email });
+  const users = await User.findOne({ email: email });
   if (users) {
     if (users.pw === pw) {
-      const token = jwt.sign({ userId: users.userId }, '4W-idea-key');
+      //{expiresIn: '5m'}
+      const token = jwt.sign({ email: users.email ,nickname: users.nickname}, '4W-idea-key');
       res.cookie('user', token);
       res.json({ token });
     } else {
