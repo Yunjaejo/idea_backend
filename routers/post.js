@@ -17,7 +17,6 @@ router.get("/post", async (req, res) => {
 //게시글 상세조회
 router.get("/post/:postId", async (req, res) => {
     const { postId } = req.params;
-    //const writes = await write.findOne({writeId: writeId });
     const post = await posts.findById(postId)
     if(test == null){
         res.status(400).send({ err: "게시물이존재하지않습니다." });
@@ -52,8 +51,11 @@ router.delete("/post/:postId", async (req, res) => {
             res.status(200).send({ result: "success" });
         }
         else{
-            res.status(400).send({result: "err"})
+            res.status(400).send({result: "사용자 본인이 아님"})
         }
+    }
+    else{
+        res.status(400).send({result: "게시글 존재하지 않음"})
     }
 })
 
@@ -70,5 +72,8 @@ router.patch("/post/:postId", async (req, res) => {
         else{
             res.status(400).send({result: "err"})
         }  
+    }
+    else{
+        res.status(400).send({result: "게시글 존재하지 않음"})
     }
 })
