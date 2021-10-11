@@ -64,7 +64,7 @@ router.patch("/:postId", async (req, res) => {
     const { title, spec, image, desc, place} = req.body;
     const ispost = await posts.findById({ postId });
     if (ispost.length > 0) {
-        if(pw == iswrite[0]["pw"]){
+        if(pw == ispost[0]["pw"]){
             await write.updateOne({ postId }, { $set: { title:title, spec:spec, image:image, desc:desc, place:place} });
             res.status(200).send({ result: "success" });
         }
