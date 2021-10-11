@@ -18,6 +18,8 @@ app.use('/post', [ postRouter ]); // postRouter를 api 하위부분에서 쓰겠
 app.use('/comment', [ commRouter ]);
 app.use('/wish', [ wishRouter ]);
 
+
+
 app.listen(port, () => {
   console.log(`listening at http://localhost:${ port }`);
 });
