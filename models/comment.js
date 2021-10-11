@@ -14,6 +14,10 @@ const commentSchema = new Schema({
     type: String,
     required: true,
   },
+  commentTime: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model('Comment', commentSchema); // 이 스키마를 모델링해서 내보내겠다 !
