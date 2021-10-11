@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Yunjaejo/idea_backend/issues"
   },
-  "homepage": "https://github.com/Yunjaejo/idea_backend#readme"
+  "homepage": "https://github.com/Yunjaejo/idea_backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
