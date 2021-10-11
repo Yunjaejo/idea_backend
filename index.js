@@ -2,10 +2,8 @@ const express = require('express')
 const app = express()
 const port = 3000
 app.use(express.json())
-
-// const connect = require('./schemas')
-// connect();
-app.use(express.static('public'));
+const Post = require("./routers/poset");
+app.use("/", [post]);
 
 
 //첫페이지 게시물 확인
