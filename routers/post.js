@@ -76,3 +76,5 @@ router.patch("/:postId", async (req, res) => {
         res.status(400).send({result: "게시글 존재하지 않음"})
     }
 })
+
+module.exports = router;
