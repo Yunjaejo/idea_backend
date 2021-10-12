@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   console.log('미들웨어 사용함');
   try {
     if (token) {
-      const decoded = jwt.verify(token, 'IDEA-secret-key');
+      const decoded = jwt.verify(token, '4W-idea-key');
       const user = await User.findOne({ userId: decoded.userId }).exec();
       res.locals.user = user.userId;
       console.log('로컬 유저는?', res.locals.user);
