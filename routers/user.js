@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const router = express.Router(); 
-const uf = require('./userFunction.js');
+const uf = require('./userfunction.js');
 
 // 회원가입
 router.post('/signup', async (req, res) => {
