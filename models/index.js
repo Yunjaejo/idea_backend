@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const connect = () => {
   mongoose
     .connect(
-      // 'mongodb://test:test@13.124.99.118:27017/IDEA?authSource=admin',
-      'mongodb://localhost:27017/IDEA',
+      'mongodb://test:test@13.124.99.118:27017/IDEA?authSource=admin',
+      // 'mongodb://localhost:27017/IDEA',
       {
         useUnifiedTopology: true,
         useNewUrlParser: true,
