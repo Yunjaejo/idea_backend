@@ -8,7 +8,13 @@ module.exports = async (req, res, next) => {
     if (token) {
       const decoded = jwt.verify(token, '4W-idea-key');
       const user = await User.findOne({ userId: decoded.userId }).exec();
-      res.locals.user = user.userId;
+      const users ={
+        userId : user._id,
+        email: user.email,
+        nickname: user.nickname,
+      }
+      
+      res.locals.user = users;
       console.log('로컬 유저는?', res.locals.user);
     } else {
       res.locals.user = undefined;

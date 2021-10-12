@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middlewares/auth-middleware");
 const Post = require("../models/post")
 const User = require('../models/user');
 const Wish = require('../models/wish');
 
-router.get("/", async (req, res) => {
+router.get("/", authMiddleware ,async (req, res) => {
     try {
-        const {user} = req.local
+        const { user } = res.locals;
         const wish = await Wish.find({userId : user.userId})
         let b = [];
         for(a of wish){
@@ -25,7 +26,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/",authMiddleware ,async (req, res) => {
     try {
         const {email, postId} = req.body;
         const isUser = await User.findOne({email : email})
@@ -37,7 +38,7 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.delete("/:wishId", async (req, res) => {
+router.delete("/:wishId",authMiddleware ,async (req, res) => {
     const { wishId } = req.params;
     const iswish = await Wish.findById(wishId);
     if (iswish) {

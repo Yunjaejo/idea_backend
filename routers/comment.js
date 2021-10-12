@@ -22,7 +22,7 @@ router.post("/:postId", async (req, res) => {
   let date = newDate.toFormat("YYYY-MM-DD HH24:MI:SS");
 
   try {
-    await comment.create({
+    await Comment.create({
       nickname: nickname,
       comment: comment,
       upperPost: postId,
