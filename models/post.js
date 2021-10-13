@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 const { Schema } = mongoose;
 const postSchema = new Schema({
   nickname: {
@@ -25,6 +25,7 @@ const postSchema = new Schema({
     type: String,
     required: true,
   },
+  like: [{ type: ObjectId, ref: "User" }],
 });
 
-module.exports = mongoose.model('Post', postSchema); // 이 스키마를 모델링해서 내보내겠다 !
+module.exports = mongoose.model("Post", postSchema); // 이 스키마를 모델링해서 내보내겠다 !
