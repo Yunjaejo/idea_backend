@@ -16,7 +16,7 @@ connect(); // 모델이랑 연결하기
 // };
 // app.use(cors(options));
 
-app.use(cors());
+app.use(cors({origin: true, credentials: true}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // POST로 메소드 받을 때 req.body로 사용가능하게 함
 
