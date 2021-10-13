@@ -32,7 +32,7 @@ router.post("/",authMiddleware ,async (req, res) => {
         const isUser = await User.findOne({email : email})
 
         await Wish.create({userId: isUser._id , postId:postId });
-        res.status(200).send({ post: d });
+        res.status(200).send();
     } catch (err) {
         res.status(400).send({err:err});
     }
